@@ -6,9 +6,22 @@
     <title>Comunicação Interna - Grupo SR</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Verde solicitado em CMYK (60, 0, 100, 0) convertido para Hexadecimal */
+            --verde-cmyk: #69BE28; 
+            --verde-escuro: #10543A;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f4f6f8;
+            /* Fundo com listras em degradê usando tons de verde nas laterais */
+            background: repeating-linear-gradient(
+                45deg,
+                #e8f5e9,
+                #e8f5e9 10px,
+                #c8e6c9 10px,
+                #c8e6c9 20px
+            );
             margin: 0;
             padding: 15px;
             display: flex;
@@ -22,42 +35,43 @@
             width: 100%;
             max-width: 650px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
             overflow: hidden;
         }
+        /* 1. TOPO COM COR DE FUNDO VERDE CMYK SOLICITADO */
         .header-banner {
-            background-color: #ffffff; /* Fundo limpo para destacar a logo sem fundo */
-            padding: 20px 15px 10px 15px;
+            background-color: var(--verde-cmyk); 
+            padding: 20px 15px;
             text-align: center;
-            border-bottom: 3px solid #10543A;
+            border-bottom: 4px solid var(--verde-escuro);
         }
         .header-banner img {
             max-width: 180px;
             height: auto;
             display: block;
-            margin: 0 auto 5px auto;
+            margin: 0 auto 10px auto;
         }
         .header-banner p {
-            margin: 5px 0 0 0;
+            margin: 0;
             font-family: 'Russo One', sans-serif;
-            font-size: 14px;
-            color: #10543A;
+            font-size: 16px;
+            color: #ffffff; /* Letras em branco para contraste no fundo verde */
             letter-spacing: 1px;
             text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
         .form-body {
             padding: 20px;
         }
-        /* Grid inteligente: 2 colunas no PC, 1 coluna no Celular */
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 14px;
         }
         .form-group {
-            margin-bottom: 0; /* Controlado pelo gap do grid */
+            margin-bottom: 0;
+            position: relative;
         }
-        /* Campos de largura total forçada (ex: observações, cliente, botões) */
         .full-width {
             grid-column: span 2;
         }
@@ -67,10 +81,6 @@
             font-weight: 600;
             color: #333333;
             font-size: 12px;
-        }
-        label span {
-            color: #de350b;
-            margin-left: 2px;
         }
         input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
             width: 100%;
@@ -89,12 +99,29 @@
             cursor: pointer;
             font-size: 12px;
         }
-        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus, textarea:focus, input[type="file"]:focus {
-            border-color: #10543A;
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--verde-escuro);
             outline: none;
             background-color: #ffffff;
             box-shadow: 0 0 0 2px rgba(16, 84, 58, 0.1);
         }
+        
+        /* 3. MENSAGEM DE ERRO PERSONALIZADA ABAIXO DOS CAMPOS */
+        .error-message {
+            color: #de350b;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 3px;
+            display: none;
+        }
+        .invalid input, .invalid select, .invalid textarea {
+            border-color: #de350b !important;
+            background-color: #fff8f7;
+        }
+        .invalid .error-message {
+            display: block;
+        }
+
         .number-generator-group {
             display: flex;
             gap: 8px;
@@ -103,7 +130,7 @@
             flex: 1;
             background-color: #f0f2f0;
             font-weight: 700;
-            color: #10543A;
+            color: var(--verde-escuro);
         }
         .btn-generator {
             background-color: #4a5568;
@@ -121,7 +148,7 @@
             background-color: #2d3748;
         }
         .btn-submit {
-            background-color: #10543A;
+            background-color: var(--verde-escuro);
             color: white;
             border: none;
             width: 100%;
@@ -133,7 +160,7 @@
             font-family: 'Russo One', sans-serif;
             letter-spacing: 1px;
             transition: background-color 0.2s;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .btn-submit:hover {
             background-color: #0b3d2a;
@@ -142,35 +169,15 @@
             opacity: 0.6;
             pointer-events: none;
         }
-        .info-required {
-            font-size: 11px;
-            color: #666;
-            margin-bottom: 12px;
-            text-align: right;
-        }
 
-        /* RESPONSIVIDADE COMPACTA PARA CELULAR */
         @media (max-width: 480px) {
-            body {
-                padding: 5px;
-            }
-            .form-body {
-                padding: 15px;
-            }
-            .form-grid {
-                grid-template-columns: 1fr; /* Força 1 coluna em telas pequenas */
-                gap: 10px;
-            }
-            .full-width {
-                grid-column: span 1;
-            }
+            body { padding: 5px; }
+            .form-body { padding: 15px; }
+            .form-grid { grid-template-columns: 1fr; gap: 12px; }
+            .full-width { grid-column: span 1; }
             input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
-                padding: 10px; /* Aumenta levemente a área de toque no celular */
-                font-size: 14px; /* Evita que o iOS dê zoom automático indesejado nos campos */
-            }
-            .btn-submit {
-                padding: 14px;
-                font-size: 16px;
+                padding: 10px;
+                font-size: 14px;
             }
         }
     </style>
@@ -179,38 +186,39 @@
 
 <div class="form-container">
     <div class="header-banner">
-        <!-- Substitua o src pelo caminho real ou link da imagem hospedada no seu GitHub -->
         <img src="Grupo SR.png" alt="Grupo SR">
         <p>Comunicação Interna</p>
     </div>
     
-    <form id="ciForm" class="form-body">
-        <div class="info-required">Campos marcados com <span>*</span> são obrigatórios.</div>
-
+    <!-- 2. "Campos marcados com *" REMOVIDO DAQUI -->
+    <form id="ciForm" class="form-body" novalidate>
         <div class="form-grid">
+            
             <!-- 1. Número Sequencial -->
             <div class="form-group full-width">
-                <label>Nº Comunicação Interna <span>*</span></label>
+                <label>Nº Comunicação Interna</label>
                 <div class="number-generator-group">
                     <input type="text" id="numeroCI" name="numeroCI" placeholder="Gere o número ao lado" readonly required>
                     <button type="button" id="btnGerar" class="btn-generator" onclick="gerarNumero()">Gerar Número CI</button>
                 </div>
+                <div class="error-message">Este campo é obrigatório. Por favor, gere o número da CI.</div>
             </div>
 
             <!-- 2. Ação -->
             <div class="form-group">
-                <label>Ação da CI <span>*</span></label>
+                <label>Ação da CI</label>
                 <select id="acao" name="acao" required>
                     <option value="" disabled selected>Escolha...</option>
                     <option value="Fabricação">Fabricação</option>
                     <option value="Requisição">Requisição</option>
                     <option value="Pintura">Pintura</option>
                 </select>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 3. Responsável CI -->
             <div class="form-group">
-                <label>Responsável CI <span>*</span></label>
+                <label>Responsável CI</label>
                 <select id="responsavel" name="responsavel" required>
                     <option value="" disabled selected>Escolha...</option>
                     <option value="Fernando Hendges Lopes">Fernando Hendges Lopes</option>
@@ -225,116 +233,87 @@
                     <option value="Henrique Moreira">Henrique Moreira</option>
                     <option value="Rafael Fagan">Rafael Fagan</option>
                 </select>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 4. Destino -->
             <div class="form-group">
-                <label>Destino da Comunicação <span>*</span></label>
+                <label>Destino da Comunicação</label>
                 <select id="destino" name="destino" required>
                     <option value="" disabled selected>Escolha...</option>
                     <option value="Almoxarifado">Almoxarifado</option>
                     <option value="Expedição">Expedição</option>
                     <option value="PCP">PCP</option>
                 </select>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 5. Data de Conclusão -->
             <div class="form-group">
-                <label>Data de Conclusão <span>*</span></label>
+                <label>Data de Conclusão</label>
                 <input type="date" id="dataConclusao" name="dataConclusao" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 6. Nome Cliente -->
             <div class="form-group full-width">
-                <label>Nome Cliente <span>*</span></label>
+                <label>Nome Cliente</label>
                 <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Nome do cliente" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 7. Número Pedido -->
             <div class="form-group">
-                <label>Número Pedido <span>*</span></label>
+                <label>Número Pedido</label>
                 <input type="number" id="numeroPedido" name="numeroPedido" placeholder="Nº do pedido" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 8. Peso Líq. -->
+            <!-- 8. Peso Líq. (Aceitando digitação com vírgula) -->
             <div class="form-group">
-                <label>Peso Líq. (kg) <span>*</span></label>
-                <input type="number" step="0.01" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500.50" required>
+                <label>Peso Líq. (kg)</label>
+                <input type="text" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500,50" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 9. Localidade -->
             <div class="form-group">
-                <label>Localidade <span>*</span></label>
+                <label>Localidade</label>
                 <input type="text" id="localidade" name="localidade" placeholder="Cidade/Estado" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <!-- 10. Almox -->
             <div class="form-group">
-                <label>Almox <span>*</span></label>
+                <label>Almox</label>
                 <input type="text" id="almox" name="almox" placeholder="Identificação do Almox" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 11. Código Item - Quantidade -->
+            <!-- 11. Código Item - Quantidade (Exemplo alterado) -->
             <div class="form-group full-width">
-                <label>Código Item - Quantidade <span>*</span></label>
-                <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XYZ - 50 un" required>
+                <label>Código Item - Quantidade</label>
+                <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XXXXX - 10UN" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 12. Cor Interna -->
+            <!-- 12. Motivo -->
             <div class="form-group full-width">
-                <label>Cor Interna <span>*</span></label>
-                <select id="corInterna" name="corInterna" required>
-                    <option value="" disabled selected>Escolha a cor...</option>
-                    <option value="AZUL 40360 EXR 53390">AZUL 40360 EXR 53390</option>
-                    <option value="AZUL MUNSELL 3.30PB2.86/3.23">AZUL MUNSELL 3.30PB2.86/3.23</option>
-                    <option value="AZUL MUNSELL 5B7/4">AZUL MUNSELL 5B7/4</option>
-                    <option value="AZUL MUNSELL 6.35B6.99/4.98">AZUL MUNSELL 6.35B6.99/4.98</option>
-                    <option value="AZUL RAL 5000">AZUL RAL 5000</option>
-                    <option value="AZUL RAL 5009">AZUL RAL 5009</option>
-                    <option value="AZUL RAL 5017">AZUL RAL 5017</option>
-                    <option value="AZUL RAL 5019">AZUL RAL 5019</option>
-                    <option value="AZUL SATAKE">AZUL SATAKE</option>
-                    <option value="AZUL WEG 40517BR">AZUL WEG 40517BR</option>
-                    <option value="BEGE MUNSELL 2.5Y6/2">BEGE MUNSELL 2.5Y6/2</option>
-                    <option value="BEGE MUNSELL 5Y6/2">BEGE MUNSELL 5Y6/2</option>
-                    <option value="BEGE MUNSELL 7.5Y8/2">BEGE MUNSELL 7.5Y8/2</option>
-                    <option value="BEGE RAL 1001">BEGE RAL 1001</option>
-                    <option value="BEGE RAL 1014">BEGE RAL 1014</option>
-                    <option value="BRANCO RAL 9016">BRANCO RAL 9016</option>
-                    <option value="BRANCO CALIFORNIA RAL 1013">BRANCO CALIFORNIA RAL 1013</option>
-                    <option value="CINZA EXECUTIVO RAL 7021">CINZA EXECUTIVO RAL 7021</option>
-                    <option value="CINZA RAL 7022">CINZA RAL 7022</option>
-                    <option value="CINZA RAL 7035">CINZA RAL 7035</option>
-                    <option value="CINZA RAL 7038">CINZA RAL 7038</option>
-                    <option value="CINZA RAL 7039">CINZA RAL 7039</option>
-                    <option value="LARANJA MUNSELL 2.5YR6/14">LARANJA MUNSELL 2.5YR6/14</option>
-                    <option value="PRATA RAL 9006">PRATA RAL 9006</option>
-                    <option value="PRETO RAL 9005 S/B">PRETO RAL 9005 S/B</option>
-                    <option value="PRETO RAL 9017">PRETO RAL 9017</option>
-                    <option value="VERDE EXR 53390">VERDE EXR 53390</option>
-                    <option value="VERDE RAL 6002">VERDE RAL 6002</option>
-                    <option value="VERDE RAL 6018">VERDE RAL 6018</option>
-                    <option value="VERDE RAL 6027">VERDE RAL 6027</option>
-                    <option value="VERMELHO RAL 3020">VERMELHO RAL 3020</option>
-                </select>
-            </div>
-
-            <!-- 13. Motivo -->
-            <div class="form-group full-width">
-                <label>Motivo da Comunicação Interna <span>*</span></label>
+                <label>Motivo da Comunicação Interna</label>
                 <input type="text" id="motivo" name="motivo" placeholder="Motivo resumido" required>
+                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 14. Observações -->
+            <!-- 13. Observações (Não obrigatório) -->
             <div class="form-group full-width">
                 <label>Observações</label>
                 <textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea>
             </div>
 
-            <!-- 15. Anexo -->
+            <!-- 14. Anexo com captura ativa de Câmera nativa no Celular -->
             <div class="form-group full-width">
-                <label>Anexar Arquivo (PDF, Desenhos, Imagens)</label>
-                <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept=".pdf,image/*,.doc,.docx,.xls,.xlsx">
+                <label>Anexar Arquivo ou Tirar Foto</label>
+                <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx">
             </div>
         </div>
 
@@ -344,6 +323,13 @@
 
 <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzb0vX5Le_r_r6Jzfixfq5nY9M9EstzQrVBfujvjGSgQW_nl4Muct8HJnMghMlrwian/exec";
+
+    // Formata o campo de peso ao digitar mudando ponto por vírgula visualmente
+    document.getElementById('pesoLiquido').addEventListener('input', function(e) {
+        let value = e.target.value;
+        value = value.replace(/[^0-9,]/g, ''); // Impede letras, permite apenas números e uma vírgula
+        e.target.value = value;
+    });
 
     async function gerarNumero() {
         const btn = document.getElementById('btnGerar');
@@ -358,6 +344,7 @@
             
             if(data && data.numero) {
                 inputNum.value = data.numero;
+                inputNum.parentElement.parentElement.classList.remove('invalid');
                 btn.innerText = "Gerado!";
                 btn.style.backgroundColor = "#10543A";
                 btn.disabled = true;
@@ -377,9 +364,24 @@
     document.getElementById('ciForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const numCI = document.getElementById('numeroCI').value;
-        if(!numCI) {
-            alert("Por favor, gere o número da CI antes de enviar.");
+        // Sistema de validação customizado campo por campo
+        let formValido = true;
+        const camposObrigatorios = this.querySelectorAll('[required]');
+        
+        camposObrigatorios.forEach(campo => {
+            const container = campo.closest('.form-group');
+            if (!campo.value.trim()) {
+                container.classList.add('invalid');
+                formValido = false;
+            } else {
+                container.classList.remove('invalid');
+            }
+        });
+
+        if (!formValido) {
+            // Rola suavemente até o primeiro campo com erro
+            const primeiroErro = this.querySelector('.invalid');
+            if (primeiroErro) primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
@@ -408,8 +410,11 @@
             arquivoType = arquivoData.type;
         }
 
+        // Converte o valor numérico com vírgula de volta para ponto apenas no envio da API
+        let pesoTratado = document.getElementById('pesoLiquido').value.replace(',', '.');
+
         const formData = {
-            numeroCI: numCI,
+            numeroCI: document.getElementById('numeroCI').value,
             acao: document.getElementById('acao').value,
             responsavel: document.getElementById('responsavel').value,
             destino: document.getElementById('destino').value,
@@ -417,12 +422,11 @@
             nomeCliente: document.getElementById('nomeCliente').value,
             numeroPedido: document.getElementById('numeroPedido').value,
             localidade: document.getElementById('localidade').value,
-            pesoLiquido: document.getElementById('pesoLiquido').value,
+            pesoLiquido: pesoTratado,
             almox: document.getElementById('almox').value,
-            corInterna: document.getElementById('corInterna').value,
-            dataConclusao: document.getElementById('dataConclusao').value,
             motivo: document.getElementById('motivo').value,
             observacoes: document.getElementById('observacoes').value,
+            dataConclusao: document.getElementById('dataConclusao').value,
             fileData: arquivoBase64,
             fileName: arquivoName,
             fileType: arquivoType
@@ -441,6 +445,7 @@
                 alert("Comunicação Interna " + resultado.numeroGerado + " enviada com sucesso!");
                 document.getElementById('ciForm').reset();
                 
+                // Reseta estado do botão de gerar número
                 const btnGerar = document.getElementById('btnGerar');
                 btnGerar.innerText = "Gerar Número CI";
                 btnGerar.style.backgroundColor = "#4a5568";
@@ -456,6 +461,15 @@
             btnSubmit.innerText = "Enviar Comunicação Interna";
             btnSubmit.classList.remove('loading');
         }
+    });
+
+    // Remove as marcações de erro conforme o usuário digita nos campos
+    document.getElementById('ciForm').querySelectorAll('input, select, textarea').forEach(elemento => {
+        elemento.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.closest('.form-group').classList.remove('invalid');
+            }
+        });
     });
 </script>
 </body>
