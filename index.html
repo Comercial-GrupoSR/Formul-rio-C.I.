@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicação Interna - Grupo SR</title>
+    <!-- Importação das fontes institucionais (ou similares web de alta fidelidade) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Russo+One&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif; /* Voz da marca: Accura corporativa */
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 650px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header-banner {
+            background-color: #10543A; /* Cor Principal do Grupo SR */
+            color: #ffffff;
+            padding: 35px 30px;
+            text-align: center;
+            border-bottom: 5px solid #008046; /* Cor de Apoio */
+        }
+        .header-banner h1 {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif; /* Substituta web para Azonix */
+            font-size: 26px;
+            letter-spacing: 6px;
+            font-weight: 700;
+        }
+        .header-banner p {
+            margin: 10px 0 0 0;
+            font-family: 'Russo One', sans-serif; /* Subtítulos institucional */
+            font-size: 16px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        .form-body {
+            padding: 35px;
+        }
+        .form-group {
+            margin-bottom: 22px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2b2b2b;
+            font-size: 14px;
+        }
+        label span {
+            color: #de350b;
+            margin-left: 3px;
+        }
+        input[type="text"], input[type="number"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fafafa;
+            transition: all 0.2s;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus, textarea:focus {
+            border-color: #10543A;
+            outline: none;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(16, 84, 58, 0.1);
+        }
+        .number-generator-group {
+            display: flex;
+            gap: 12px;
+        }
+        .number-generator-group input {
+            flex: 1;
+            background-color: #f0f2f0;
+            font-weight: 700;
+            color: #10543A;
+            letter-spacing: 1px;
+        }
+        .btn-generator {
+            background-color: #4a5568;
+            color: white;
+            border: none;
+            padding: 0 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+        .btn-generator:hover {
+            background-color: #2d3748;
+        }
+        .btn-submit {
+            background-color: #10543A;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 1px;
+            transition: background-color 0.2s;
+            margin-top: 15px;
+        }
+        .btn-submit:hover {
+            background-color: #0b3d2a;
+        }
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .info-required {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header-banner">
+        <h1>G R U P O &nbsp; S R</h1>
+        <p>Comunicação Interna</p>
+    </div>
+    
+    <form id="ciForm" class="form-body">
+        <div class="info-required">Campos marcados com <span>*</span> são obrigatórios.</div>
+
+        <!-- 1. Número Sequencial -->
+        <div class="form-group">
+            <label>Nº Comunicação Interna <span>*</span></label>
+            <div class="number-generator-group">
+                <input type="text" id="numeroCI" name="numeroCI" placeholder="Clique ao lado para gerar" readonly required>
+                <button type="button" id="btnGerar" class="btn-generator" onclick="gerarNumero()">Gerar Número CI</button>
+            </div>
+        </div>
+
+        <!-- 2. Ação da Comunicação Interna -->
+        <div class="form-group">
+            <label>Ação da Comunicação Interna <span>*</span></label>
+            <select id="acao" name="acao" required>
+                <option value="" disabled selected>Escolha...</option>
+                <option value="Fabricação">Fabricação</option>
+                <option value="Requisição">Requisição</option>
+                <option value="Pintura">Pintura</option>
+            </select>
+        </div>
+
+        <!-- 3. Responsável CI -->
+        <div class="form-group">
+            <label>Responsável CI <span>*</span></label>
+            <select id="responsavel" name="responsavel" required>
+                <option value="" disabled selected>Escolha...</option>
+                <option value="Fernando Hendges Lopes">Fernando Hendges Lopes</option>
+                <option value="Marcos Malezan Tasquetto">Marcos Malezan Tasquetto</option>
+                <option value="Raphael Naeher">Raphael Naeher</option>
+                <option value="Ricardo Moreira">Ricardo Moreira</option>
+                <option value="Alan Renato Virago">Alan Renato Virago</option>
+                <option value="José Tomas">José Tomas</option>
+                <option value="Luis Filipe">Luis Filipe</option>
+                <option value="Eduardo Prado">Eduardo Prado</option>
+                <option value="Enrique Carvalho">Enrique Carvalho</option>
+                <option value="Henrique Moreira">Henrique Moreira</option>
+                <option value="Rafael Fagan">Rafael Fagan</option>
+            </select>
+        </div>
+
+        <!-- 4. Destino da Comunicação -->
+        <div class="form-group">
+            <label>Destino da Comunicação <span>*</span></label>
+            <select id="destino" name="destino" required>
+                <option value="" disabled selected>Escolha...</option>
+                <option value="Almoxarifado">Almoxarifado</option>
+                <option value="Expedição">Expedição</option>
+                <option value="PCP">PCP</option>
+            </select>
+        </div>
+
+        <!-- 5. Código Item - Quantidade -->
+        <div class="form-group">
+            <label>Código Item - Quantidade <span>*</span></label>
+            <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Digite a sua resposta" required>
+        </div>
+
+        <!-- 6. Nome Cliente -->
+        <div class="form-group">
+            <label>Nome Cliente <span>*</span></label>
+            <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Digite a sua resposta" required>
+        </div>
+
+        <!-- 7. Número Pedido -->
+        <div class="form-group">
+            <label>Número Pedido <span>*</span></label>
+            <input type="number" id="numeroPedido" name="numeroPedido" placeholder="Digite um número" required>
+        </div>
+
+        <!-- 8. Localidade -->
+        <div class="form-group">
+            <label>Localidade <span>*</span></label>
+            <input type="text" id="localidade" name="localidade" placeholder="Digite a sua resposta" required>
+        </div>
+
+        <!-- 9. Peso Líq. -->
+        <div class="form-group">
+            <label>Peso Líq. <span>*</span></label>
+            <input type="number" step="0.01" id="pesoLiquido" name="pesoLiquido" placeholder="Digite um número" required>
+        </div>
+
+        <!-- 10. Almox -->
+        <div class="form-group">
+            <label>Almox <span>*</span></label>
+            <input type="text" id="almox" name="almox" placeholder="Digite a sua resposta" required>
+        </div>
+
+        <!-- 11. Cor Interna -->
+        <div class="form-group">
+            <label>Cor Interna <span>*</span></label>
+            <select id="corInterna" name="corInterna" required>
+                <option value="" disabled selected>Escolha...</option>
+                <option value="AZUL 40360 EXR 53390">AZUL 40360 EXR 53390</option>
+                <option value="AZUL MUNSELL 3.30PB2.86/3.23">AZUL MUNSELL 3.30PB2.86/3.23</option>
+                <option value="AZUL MUNSELL 5B7/4">AZUL MUNSELL 5B7/4</option>
+                <option value="AZUL MUNSELL 6.35B6.99/4.98">AZUL MUNSELL 6.35B6.99/4.98</option>
+                <option value="AZUL RAL 5000">AZUL RAL 5000</option>
+                <option value="AZUL RAL 5009">AZUL RAL 5009</option>
+                <option value="AZUL RAL 5017">AZUL RAL 5017</option>
+                <option value="AZUL RAL 5019">AZUL RAL 5019</option>
+                <option value="AZUL SATAKE">AZUL SATAKE</option>
+                <option value="AZUL WEG 40517BR">AZUL WEG 40517BR</option>
+                <option value="BEGE MUNSELL 2.5Y6/2">BEGE MUNSELL 2.5Y6/2</option>
+                <option value="BEGE MUNSELL 5Y6/2">BEGE MUNSELL 5Y6/2</option>
+                <option value="BEGE MUNSELL 7.5Y8/2">BEGE MUNSELL 7.5Y8/2</option>
+                <option value="BEGE RAL 1001">BEGE RAL 1001</option>
+                <option value="BEGE RAL 1014">BEGE RAL 1014</option>
+                <option value="BRANCO RAL 9016">BRANCO RAL 9016</option>
+                <option value="BRANCO CALIFORNIA RAL 1013">BRANCO CALIFORNIA RAL 1013</option>
+                <option value="CINZA EXECUTIVO RAL 7021">CINZA EXECUTIVO RAL 7021</option>
+                <option value="CINZA RAL 7022">CINZA RAL 7022</option>
+                <option value="CINZA RAL 7035">CINZA RAL 7035</option>
+                <option value="CINZA RAL 7038">CINZA RAL 7038</option>
+                <option value="CINZA RAL 7039">CINZA RAL 7039</option>
+                <option value="LARANJA MUNSELL 2.5YR6/14">LARANJA MUNSELL 2.5YR6/14</option>
+                <option value="PRATA RAL 9006">PRATA RAL 9006</option>
+                <option value="PRETO RAL 9005 S/B">PRETO RAL 9005 S/B</option>
+                <option value="PRETO RAL 9017">PRETO RAL 9017</option>
+                <option value="VERDE EXR 53390">VERDE EXR 53390</option>
+                <option value="VERDE RAL 6002">VERDE RAL 6002</option>
+                <option value="VERDE RAL 6018">VERDE RAL 6018</option>
+                <option value="VERDE RAL 6027">VERDE RAL 6027</option>
+                <option value="VERMELHO RAL 3020">VERMELHO RAL 3020</option>
+            </select>
+        </div>
+
+        <!-- 12. Data de Conclusão -->
+        <div class="form-group">
+            <label>Data de Conclusão <span>*</span></label>
+            <input type="date" id="dataConclusao" name="dataConclusao" required>
+        </div>
+
+        <!-- 13. Motivo da Comunicação Interna -->
+        <div class="form-group">
+            <label>Motivo da Comunicação Interna <span>*</span></label>
+            <input type="text" id="motivo" name="motivo" placeholder="Digite a sua resposta" required>
+        </div>
+
+        <!-- 14. Observações -->
+        <div class="form-group">
+            <label>Observações</label>
+            <textarea id="observacoes" name="observacoes" rows="4" placeholder="Digite a sua resposta (opcional)"></textarea>
+        </div>
+
+        <button type="submit" id="btnEnviar" class="btn-submit">Enviar Comunicação Interna</button>
+    </form>
+</div>
+
+<script>
+    // URL DO SEU GOOGLE APPS SCRIPT PUBLICADO COMO WEB APP
+    const WEB_APP_URL = "URL_DO_SEU_GOOGLE_APPS_SCRIPT";
+
+    async function gerarNumero() {
+        const btn = document.getElementById('btnGerar');
+        const inputNum = document.getElementById('numeroCI');
+        
+        btn.innerText = "Gerando...";
+        btn.classList.add('loading');
+
+        try {
+            const response = await fetch(`${WEB_APP_URL}?action=getSequence`);
+            const data = await response.json();
+            
+            if(data && data.numero) {
+                inputNum.value = data.numero;
+                btn.innerText = "Gerado!";
+                btn.style.backgroundColor = "#008046";
+                btn.disabled = true;
+            } else {
+                alert("Erro ao obter o número sequencial.");
+                btn.innerText = "Gerar Número CI";
+                btn.classList.remove('loading');
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Erro de conexão com o gerador.");
+            btn.innerText = "Gerar Número CI";
+            btn.classList.remove('loading');
+        }
+    }
+
+    document.getElementById('ciForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const numCI = document.getElementById('numeroCI').value;
+        if(!numCI) {
+            alert("Por favor, gere o número da CI antes de enviar.");
+            return;
+        }
+
+        const btnSubmit = document.getElementById('btnEnviar');
+        btnSubmit.innerText = "Enviando para o Asana...";
+        btnSubmit.classList.add('loading');
+
+        const formData = {
+            numeroCI: numCI,
+            acao: document.getElementById('acao').value,
+            responsavel: document.getElementById('responsavel').value,
+            destino: document.getElementById('destino').value,
+            codigoQuantidade: document.getElementById('codigoQuantidade').value,
+            nomeCliente: document.getElementById('nomeCliente').value,
+            numeroPedido: document.getElementById('numeroPedido').value,
+            localidade: document.getElementById('localidade').value,
+            pesoLiquido: document.getElementById('pesoLiquido').value,
+            almox: document.getElementById('almox').value,
+            corInterna: document.getElementById('corInterna').value,
+            dataConclusao: document.getElementById('dataConclusao').value,
+            motivo: document.getElementById('motivo').value,
+            observacoes: document.getElementById('observacoes').value
+        };
+
+        try {
+            await fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            alert("Comunicação Interna enviada com sucesso e cadastrada no Asana!");
+            document.getElementById('ciForm').reset();
+            
+            const btnGerar = document.getElementById('btnGerar');
+            btnGerar.innerText = "Gerar Número CI";
+            btnGerar.style.backgroundColor = "#4a5568";
+            btnGerar.disabled = false;
+            
+            btnSubmit.innerText = "Enviar Comunicação Interna";
+            btnSubmit.classList.remove('loading');
+
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao enviar os dados para o servidor.");
+            btnSubmit.innerText = "Enviar Comunicação Interna";
+            btnSubmit.classList.remove('loading');
+        }
+    });
+</script>
+</body>
+</html>
