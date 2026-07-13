@@ -61,7 +61,7 @@
             color: #de350b;
             margin-left: 3px;
         }
-        input[type="text"], input[type="number"], input[type="date"], select, textarea {
+        input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
             width: 100%;
             padding: 12px 14px;
             border: 1px solid #cccccc;
@@ -72,7 +72,12 @@
             background-color: #fafafa;
             transition: all 0.2s;
         }
-        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus, textarea:focus {
+        input[type="file"] {
+            padding: 8px 10px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus, textarea:focus, input[type="file"]:focus {
             border-color: #10543A;
             outline: none;
             background-color: #ffffff;
@@ -288,12 +293,19 @@
             <textarea id="observacoes" name="observacoes" rows="4" placeholder="Digite a sua resposta (opcional)"></textarea>
         </div>
 
+        <!-- 15. Campo de Anexo integrado abaixo das observações -->
+        <div class="form-group">
+            <label>Anexar Arquivo (PDF, Desenhos, Imagens)</label>
+            <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept=".pdf,image/*,.doc,.docx,.xls,.xlsx">
+        </div>
+
         <button type="submit" id="btnEnviar" class="btn-submit">Enviar Comunicação Interna</button>
     </form>
 </div>
 
 <script>
     // URL DO SEU GOOGLE APPS SCRIPT PUBLICADO COMO WEB APP
+    // Você alterará essa constante quando for configurar a automação do Script/Asana
     const WEB_APP_URL = "URL_DO_SEU_GOOGLE_APPS_SCRIPT";
 
     async function gerarNumero() {
@@ -338,6 +350,23 @@
         btnSubmit.innerText = "Enviando para o Asana...";
         btnSubmit.classList.add('loading');
 
+        const fileInput = document.getElementById('arquivoAnexo');
+        let arquivoData = null;
+
+        // Se houver arquivo anexado, converte nativamente para Base64 antes de despachar
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            arquivoData = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve({
+                    base64: reader.result.split(',')[1],
+                    name: file.name,
+                    type: file.type
+                });
+                reader.readAsDataURL(file);
+            });
+        }
+
         const formData = {
             numeroCI: numCI,
             acao: document.getElementById('acao').value,
@@ -352,7 +381,8 @@
             corInterna: document.getElementById('corInterna').value,
             dataConclusao: document.getElementById('dataConclusao').value,
             motivo: document.getElementById('motivo').value,
-            observacoes: document.getElementById('observacoes').value
+            observacoes: document.getElementById('observacoes').value,
+            arquivo: arquivoData
         };
 
         try {
