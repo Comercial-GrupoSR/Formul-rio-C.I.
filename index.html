@@ -4,72 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicação Interna - Grupo SR</title>
-    <!-- Importação das fontes institucionais -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght=700&family=Russo+One&family=Montserrat:wght=400;600;700&display=swap" rel="stylesheet">
+    <!-- Fontes institucionais do Manual de Marca:
+         Azonix  -> substituída por Orbitron (indisponível em web font livre)
+         Russo One -> fonte oficial, disponível no Google Fonts
+         Accura  -> substituída por Montserrat (indisponível em web font livre) -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Russo+One&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Cor principal - Manual de Marca (HEX #1D543A / PANTONE 7484 CP) */
+            --sr-primary: #1D543A;
+            --sr-primary-dark: #123825;
+            /* Paleta de apoio - Manual de Marca */
+            --sr-accent: #00B046;   /* PANTONE 7481 CP */
+            --sr-lime: #7DC817;     /* PANTONE 2421 CP */
+            --sr-mint: #5BBA6F;     /* PANTONE 2249 CP */
+
+            --sr-ink: #1c211f;
+            --sr-paper: #f2f5f3;
+            --sr-line: #d7ded9;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f4f6f8;
+            background-color: var(--sr-paper);
+            background-image:
+                radial-gradient(circle at 100% 0%, rgba(0,176,70,0.06) 0%, transparent 45%),
+                radial-gradient(circle at 0% 100%, rgba(29,84,58,0.05) 0%, transparent 40%);
             margin: 0;
-            padding: 40px 20px;
+            padding: 48px 20px;
             display: flex;
             justify-content: center;
+            color: var(--sr-ink);
         }
+
         .form-container {
             background-color: #ffffff;
             width: 100%;
             max-width: 650px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            box-shadow: 0 10px 34px rgba(15, 40, 28, 0.12);
             overflow: hidden;
         }
+
+        /* ===== CABEÇALHO ===== */
         .header-banner {
-            background-color: #10543A; /* Cor Principal do Grupo SR */
+            position: relative;
+            background: linear-gradient(135deg, var(--sr-primary) 0%, var(--sr-primary-dark) 100%);
             color: #ffffff;
-            padding: 35px 30px;
+            padding: 40px 30px 32px;
             text-align: center;
-            border-bottom: 5px solid #008046; /* Cor de Apoio */
+            overflow: hidden;
+            isolation: isolate;
         }
+
+        /* Elementos gráficos: facetas angulares inspiradas no logotipo (manual de marca, pág. 11-12) */
+        .header-banner::before,
+        .header-banner::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+        }
+        .header-banner::before {
+            width: 220px;
+            height: 220px;
+            top: -110px;
+            right: -70px;
+            background: var(--sr-accent);
+            opacity: 0.22;
+            clip-path: polygon(30% 0%, 100% 0%, 100% 70%, 60% 100%, 0% 100%);
+        }
+        .header-banner::after {
+            width: 140px;
+            height: 140px;
+            bottom: -70px;
+            left: -40px;
+            background: var(--sr-lime);
+            opacity: 0.18;
+            clip-path: polygon(0% 0%, 60% 0%, 100% 40%, 100% 100%, 20% 100%);
+        }
+
         .header-banner h1 {
             margin: 0;
             font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
             font-size: 26px;
-            letter-spacing: 6px;
-            font-weight: 700;
+            letter-spacing: 7px;
         }
         .header-banner p {
             margin: 10px 0 0 0;
             font-family: 'Russo One', sans-serif;
-            font-size: 16px;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.92;
         }
+
+        /* Faixa de assinatura com as 3 cores de apoio, representando as divisões do Grupo SR */
+        .brand-stripe {
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(90deg, var(--sr-accent) 0%, var(--sr-mint) 50%, var(--sr-lime) 100%);
+        }
+
         .form-body {
-            padding: 35px;
+            padding: 36px 35px 30px;
         }
+
         .form-group {
             margin-bottom: 22px;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #2b2b2b;
-            font-size: 14px;
+            color: var(--sr-ink);
+            font-size: 13.5px;
+            letter-spacing: 0.2px;
         }
         label span {
             color: #de350b;
             margin-left: 3px;
         }
+
         input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
             width: 100%;
             padding: 12px 14px;
-            border: 1px solid #cccccc;
+            border: 1px solid var(--sr-line);
             border-radius: 6px;
             box-sizing: border-box;
             font-size: 14px;
             font-family: 'Montserrat', sans-serif;
-            background-color: #fafafa;
+            background-color: #fafbfa;
+            color: var(--sr-ink);
             transition: all 0.2s;
         }
         input[type="file"] {
@@ -77,25 +146,27 @@
             background-color: #ffffff;
             cursor: pointer;
         }
-        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, select:focus, textarea:focus, input[type="file"]:focus {
-            border-color: #10543A;
+        input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus,
+        select:focus, textarea:focus, input[type="file"]:focus {
+            border-color: var(--sr-primary);
             outline: none;
             background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(16, 84, 58, 0.1);
+            box-shadow: 0 0 0 3px rgba(0, 176, 70, 0.15);
         }
+
         .number-generator-group {
             display: flex;
             gap: 12px;
         }
         .number-generator-group input {
             flex: 1;
-            background-color: #f0f2f0;
+            background-color: #eef4f0;
             font-weight: 700;
-            color: #10543A;
+            color: var(--sr-primary);
             letter-spacing: 1px;
         }
         .btn-generator {
-            background-color: #4a5568;
+            background-color: var(--sr-primary);
             color: white;
             border: none;
             padding: 0 22px;
@@ -103,39 +174,57 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 13px;
+            letter-spacing: 0.3px;
             transition: background-color 0.2s;
             white-space: nowrap;
         }
         .btn-generator:hover {
-            background-color: #2d3748;
+            background-color: var(--sr-primary-dark);
         }
+
         .btn-submit {
-            background-color: #10543A;
+            background-color: var(--sr-accent);
             color: white;
             border: none;
             width: 100%;
             padding: 15px;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             font-family: 'Russo One', sans-serif;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             transition: background-color 0.2s;
             margin-top: 15px;
         }
         .btn-submit:hover {
-            background-color: #0b3d2a;
+            background-color: var(--sr-primary);
         }
+
         .loading {
             opacity: 0.6;
             pointer-events: none;
         }
+
         .info-required {
             font-size: 12px;
-            color: #666;
+            color: #6b756f;
             margin-bottom: 20px;
             text-align: right;
+        }
+
+        .form-footer {
+            text-align: center;
+            padding: 16px 20px 22px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            color: #8b948e;
+            border-top: 1px solid var(--sr-line);
+        }
+        .form-footer strong {
+            color: var(--sr-primary);
         }
     </style>
 </head>
@@ -146,7 +235,8 @@
         <h1>G R U P O &nbsp; S R</h1>
         <p>Comunicação Interna</p>
     </div>
-    
+    <div class="brand-stripe"></div>
+
     <form id="ciForm" class="form-body">
         <div class="info-required">Campos marcados com <span>*</span> são obrigatórios.</div>
 
@@ -301,6 +391,8 @@
 
         <button type="submit" id="btnEnviar" class="btn-submit">Enviar Comunicação Interna</button>
     </form>
+
+    <div class="form-footer"><strong>GRUPO SR</strong> · Equipamentos · Elevadores · Service</div>
 </div>
 
 <script>
@@ -321,7 +413,7 @@
             if(data && data.numero) {
                 inputNum.value = data.numero;
                 btn.innerText = "Gerado!";
-                btn.style.backgroundColor = "#008046";
+                btn.style.backgroundColor = "#00B046";
                 btn.disabled = true;
             } else {
                 alert("Erro ao obter o número sequencial.");
@@ -409,7 +501,7 @@
                 // Restaura o botão de gerar número sequencial
                 const btnGerar = document.getElementById('btnGerar');
                 btnGerar.innerText = "Gerar Número CI";
-                btnGerar.style.backgroundColor = "#4a5568";
+                btnGerar.style.backgroundColor = "#1D543A";
                 btnGerar.disabled = false;
             } else {
                 alert("Erro reportado pelo servidor: " + resultado.error);
