@@ -8,18 +8,23 @@
     <style>
         :root {
             --verde-escuro: #10543A;
-            /* Tom verde claro extraído exatamente das listras do fundo */
             --verde-fundo-logo: #e8f5e9; 
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
+            /* 
+               NOVO FUNDO (Baseado na imagem 3 de Elementos Gráficos):
+               Listras diagonais mais largas e estilizadas usando os tons verdes da marca
+            */
             background: repeating-linear-gradient(
-                45deg,
-                #e8f5e9,
-                #e8f5e9 10px,
-                #c8e6c9 10px,
-                #c8e6c9 20px
+                -45deg,
+                #10543A,
+                #10543A 30px,
+                #0d422e 30px,
+                #0d422e 60px,
+                #146344 60px,
+                #146344 90px
             );
             margin: 0;
             padding: 15px;
@@ -34,10 +39,9 @@
             width: 100%;
             max-width: 650px;
             border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        /* FUNDO DA LOGO AJUSTADO PARA O VERDE CLARO DAS LISTRAS */
         .header-banner {
             background-color: var(--verde-fundo-logo); 
             padding: 20px 15px;
@@ -54,7 +58,7 @@
             margin: 0;
             font-family: 'Russo One', sans-serif;
             font-size: 16px;
-            color: var(--verde-escuro); /* Mudado para verde escuro para dar contraste */
+            color: var(--verde-escuro); 
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -80,7 +84,6 @@
             color: #333333;
             font-size: 12px;
         }
-        /* ESTILO DO ASTERISCO EM VERMELHO REATIVADO */
         label span {
             color: #de350b;
             margin-left: 2px;
@@ -134,7 +137,6 @@
             font-weight: 700;
             color: var(--verde-escuro);
         }
-        /* BOTÃO DA MESMA COR DO ENVIAR DA CI */
         .btn-generator {
             background-color: var(--verde-escuro);
             color: white;
@@ -150,7 +152,6 @@
         .btn-generator:hover {
             opacity: 0.9;
         }
-        /* ESTADO QUANDO O NÚMERO JÁ FOI GERADO (VERDE OPACO) */
         .btn-generator:disabled {
             background-color: rgba(16, 84, 58, 0.5) !important;
             color: rgba(255, 255, 255, 0.8);
@@ -202,7 +203,6 @@
     <form id="ciForm" class="form-body" novalidate>
         <div class="form-grid">
             
-            <!-- 1. Número Sequencial -->
             <div class="form-group full-width">
                 <label>Nº Comunicação Interna <span>*</span></label>
                 <div class="number-generator-group">
@@ -212,7 +212,6 @@
                 <div class="error-message">Este campo é obrigatório. Por favor, gere o número da CI.</div>
             </div>
 
-            <!-- 2. Ação -->
             <div class="form-group">
                 <label>Ação da CI <span>*</span></label>
                 <select id="acao" name="acao" required>
@@ -224,7 +223,6 @@
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 3. Responsável CI -->
             <div class="form-group">
                 <label>Responsável CI <span>*</span></label>
                 <select id="responsavel" name="responsavel" required>
@@ -244,7 +242,6 @@
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 4. Destino -->
             <div class="form-group">
                 <label>Destino da Comunicação <span>*</span></label>
                 <select id="destino" name="destino" required>
@@ -256,69 +253,59 @@
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 5. Data de Conclusão -->
             <div class="form-group">
                 <label>Data de Conclusão <span>*</span></label>
                 <input type="date" id="dataConclusao" name="dataConclusao" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 6. Nome Cliente -->
             <div class="form-group full-width">
                 <label>Nome Cliente <span>*</span></label>
                 <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Nome do cliente" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 7. Número Pedido -->
             <div class="form-group">
                 <label>Número Pedido <span>*</span></label>
                 <input type="number" id="numeroPedido" name="numeroPedido" placeholder="Nº do pedido" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 8. Peso Líq. -->
             <div class="form-group">
                 <label>Peso Líq. (kg) <span>*</span></label>
                 <input type="text" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500,50" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 9. Localidade -->
             <div class="form-group">
                 <label>Localidade <span>*</span></label>
                 <input type="text" id="localidade" name="localidade" placeholder="Cidade/Estado" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 10. Almox -->
             <div class="form-group">
                 <label>Almox <span>*</span></label>
                 <input type="text" id="almox" name="almox" placeholder="Identificação do Almox" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 11. Código Item - Quantidade -->
             <div class="form-group full-width">
                 <label>Código Item - Quantidade <span>*</span></label>
                 <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XXXXX - 10UN" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 12. Motivo -->
             <div class="form-group full-width">
                 <label>Motivo da Comunicação Interna <span>*</span></label>
                 <input type="text" id="motivo" name="motivo" placeholder="Motivo resumido" required>
                 <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
-            <!-- 13. Observações (Não obrigatório) -->
             <div class="form-group full-width">
                 <label>Observações</label>
                 <textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea>
             </div>
 
-            <!-- 14. Anexo -->
             <div class="form-group full-width">
                 <label>Anexar Arquivo ou Tirar Foto</label>
                 <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx">
@@ -353,7 +340,7 @@
                 inputNum.value = data.numero;
                 inputNum.parentElement.parentElement.classList.remove('invalid');
                 btn.innerText = "Gerado!";
-                btn.disabled = true; // Ativa o verde opaco configurado no CSS
+                btn.disabled = true;
             } else {
                 alert("Erro ao obter o número sequencial.");
                 btn.innerText = "Gerar Número CI";
