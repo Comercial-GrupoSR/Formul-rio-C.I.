@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicação Interna - Grupo SR</title>
-    <!-- Importação das fontes institucionais (ou similares web de alta fidelidade) -->
+    <!-- Importação das fontes institucionais -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Russo+One&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Montserrat', sans-serif; /* Voz da marca: Accura corporativa */
+            font-family: 'Montserrat', sans-serif;
             background-color: #f4f6f8;
             margin: 0;
             padding: 40px 20px;
@@ -32,14 +32,14 @@
         }
         .header-banner h1 {
             margin: 0;
-            font-family: 'Orbitron', sans-serif; /* Substituta web para Azonix */
+            font-family: 'Orbitron', sans-serif;
             font-size: 26px;
             letter-spacing: 6px;
             font-weight: 700;
         }
         .header-banner p {
             margin: 10px 0 0 0;
-            font-family: 'Russo One', sans-serif; /* Subtítulos institucional */
+            font-family: 'Russo One', sans-serif;
             font-size: 16px;
             letter-spacing: 1px;
             opacity: 0.9;
@@ -293,7 +293,7 @@
             <textarea id="observacoes" name="observacoes" rows="4" placeholder="Digite a sua resposta (opcional)"></textarea>
         </div>
 
-        <!-- 15. Campo de Anexo integrado abaixo das observações -->
+        <!-- 15. Campo de Anexo -->
         <div class="form-group">
             <label>Anexar Arquivo (PDF, Desenhos, Imagens)</label>
             <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept=".pdf,image/*,.doc,.docx,.xls,.xlsx">
@@ -304,9 +304,8 @@
 </div>
 
 <script>
-    // URL DO SEU GOOGLE APPS SCRIPT PUBLICADO COMO WEB APP
-    // Você alterará essa constante quando for configurar a automação do Script/Asana
-    const WEB_APP_URL = "URL_DO_SEU_GOOGLE_APPS_SCRIPT";
+    // URL OFICIAL DO SEU GOOGLE APPS SCRIPT WEB APP
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzb0vX5Le_r_r6Jzfixfq5nY9M9EstzQrVBfujvjGSgQW_nl4Muct8HJnMghMlrwian/exec";
 
     async function gerarNumero() {
         const btn = document.getElementById('btnGerar');
