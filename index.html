@@ -161,7 +161,7 @@
         const resultado = await response.json();
 
         if (resultado.numero) {
-            inputNumero.value = "CI-" + resultado.numero;
+            inputNumero.value = resultado.numero;
         } else {
             alert("Não foi possível gerar o número. Tente novamente.");
         }
