@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicação Interna - Grupo SR</title>
-    <!-- Linha adicionada para o ícone do projeto -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
     <style>
         :root {
             --verde-escuro: #10543A;
@@ -15,179 +14,30 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: repeating-linear-gradient(
-                -45deg,
-                #10543A,
-                #10543A 30px,
-                #0d422e 30px,
-                #0d422e 60px,
-                #146344 60px,
-                #146344 90px
-            );
-            margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
+            background: repeating-linear-gradient(-45deg, #10543A, #10543A 30px, #0d422e 30px, #0d422e 60px, #146344 60px, #146344 90px);
+            margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box;
         }
-        .form-container {
-            background-color: #ffffff;
-            width: 100%;
-            max-width: 650px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        .header-banner {
-            background-color: var(--verde-fundo-logo); 
-            padding: 20px 15px;
-            text-align: center;
-            border-bottom: 4px solid var(--verde-escuro);
-        }
-        .header-banner img {
-            max-width: 180px;
-            height: auto;
-            display: block;
-            margin: 0 auto 10px auto;
-        }
-        .header-banner p {
-            margin: 0;
-            font-family: 'Russo One', sans-serif;
-            font-size: 16px;
-            color: var(--verde-escuro); 
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .form-body {
-            padding: 20px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-        .form-group {
-            margin-bottom: 0;
-            position: relative;
-        }
-        .full-width {
-            grid-column: span 2;
-        }
-        label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 600;
-            color: #333333;
-            font-size: 12px;
-        }
-        label span {
-            color: #de350b;
-            margin-left: 2px;
-        }
+        .form-container { background-color: #ffffff; width: 100%; max-width: 650px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden; }
+        .header-banner { background-color: var(--verde-fundo-logo); padding: 20px 15px; text-align: center; border-bottom: 4px solid var(--verde-escuro); }
+        .header-banner img { max-width: 180px; height: auto; display: block; margin: 0 auto 10px auto; }
+        .header-banner p { margin: 0; font-family: 'Russo One', sans-serif; font-size: 16px; color: var(--verde-escuro); letter-spacing: 1px; text-transform: uppercase; }
+        .form-body { padding: 20px; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .form-group { margin-bottom: 0; position: relative; }
+        .full-width { grid-column: span 2; }
+        label { display: block; margin-bottom: 4px; font-weight: 600; color: #333333; font-size: 12px; }
+        label span { color: #de350b; margin-left: 2px; }
         input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 13px;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #fafafa;
-            transition: all 0.2s;
+            width: 100%; padding: 8px 10px; border: 1px solid #cccccc; border-radius: 5px; box-sizing: border-box; font-size: 13px; font-family: 'Montserrat', sans-serif; background-color: #fafafa; transition: all 0.2s;
         }
-        input[type="file"] {
-            padding: 5px;
-            background-color: #ffffff;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--verde-escuro);
-            outline: none;
-            background-color: #ffffff;
-            box-shadow: 0 0 0 2px rgba(16, 84, 58, 0.1);
-        }
-        
-        .error-message {
-            color: #de350b;
-            font-size: 10px;
-            font-weight: 600;
-            margin-top: 3px;
-            display: none;
-        }
-        .invalid input, .invalid select, .invalid textarea {
-            border-color: #de350b !important;
-            background-color: #fff8f7;
-        }
-        .invalid .error-message {
-            display: block;
-        }
-
-        .number-generator-group {
-            display: flex;
-            gap: 8px;
-        }
-        .number-generator-group input {
-            flex: 1;
-            background-color: #f0f2f0;
-            font-weight: 700;
-            color: var(--verde-escuro);
-        }
-        .btn-generator {
-            background-color: var(--verde-escuro);
-            color: white;
-            border: none;
-            padding: 0 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .btn-generator:hover {
-            opacity: 0.9;
-        }
-        .btn-generator:disabled {
-            background-color: rgba(16, 84, 58, 0.5) !important;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: not-allowed;
-        }
-        .btn-submit {
-            background-color: var(--verde-escuro);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Russo One', sans-serif;
-            letter-spacing: 1px;
-            transition: background-color 0.2s;
-            margin-top: 15px;
-        }
-        .btn-submit:hover {
-            background-color: #0b3d2a;
-        }
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        @media (max-width: 480px) {
-            body { padding: 5px; }
-            .form-body { padding: 15px; }
-            .form-grid { grid-template-columns: 1fr; gap: 12px; }
-            .full-width { grid-column: span 1; }
-            input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
-                padding: 10px;
-                font-size: 14px;
-            }
-        }
+        .error-message { color: #de350b; font-size: 10px; font-weight: 600; margin-top: 3px; display: none; }
+        .invalid input, .invalid select, .invalid textarea { border-color: #de350b !important; background-color: #fff8f7; }
+        .invalid .error-message { display: block; }
+        .number-generator-group { display: flex; gap: 8px; }
+        .number-generator-group input { flex: 1; background-color: #f0f2f0; font-weight: 700; color: var(--verde-escuro); }
+        .btn-generator { background-color: var(--verde-escuro); color: white; border: none; padding: 0 12px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 12px; transition: all 0.2s; white-space: nowrap; }
+        .btn-submit { background-color: var(--verde-escuro); color: white; border: none; width: 100%; padding: 12px; border-radius: 5px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Russo One', sans-serif; letter-spacing: 1px; transition: background-color 0.2s; margin-top: 15px; }
+        .loading { opacity: 0.6; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -200,14 +50,12 @@
     
     <form id="ciForm" class="form-body" novalidate>
         <div class="form-grid">
-            
             <div class="form-group full-width">
                 <label>Nº Sequencial <span>*</span></label>
                 <div class="number-generator-group">
                     <input type="text" id="numeroCI" name="numeroCI" placeholder="Gere o número ao lado" readonly required>
                     <button type="button" id="btnGerar" class="btn-generator" onclick="gerarNumero()">Gerar Número CI</button>
                 </div>
-                <div class="error-message">Este campo é obrigatório. Por favor, gere o número da CI.</div>
             </div>
 
             <div class="form-group">
@@ -218,7 +66,6 @@
                     <option value="Requisição">Requisição</option>
                     <option value="Pintura">Pintura</option>
                 </select>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
@@ -237,7 +84,6 @@
                     <option value="Henrique Moreira">Henrique Moreira</option>
                     <option value="Rafael Fagan">Rafael Fagan</option>
                 </select>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
@@ -248,55 +94,85 @@
                     <option value="Expedição">Expedição</option>
                     <option value="PCP">PCP</option>
                 </select>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
                 <label>Data de Conclusão <span>*</span></label>
                 <input type="date" id="dataConclusao" name="dataConclusao" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group full-width">
                 <label>Nome Cliente <span>*</span></label>
                 <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Nome do cliente" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
                 <label>Número Pedido <span>*</span></label>
                 <input type="number" id="numeroPedido" name="numeroPedido" placeholder="Nº do pedido" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
                 <label>Peso Líq. (kg) <span>*</span></label>
                 <input type="text" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500,50" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group">
                 <label>Localidade <span>*</span></label>
                 <input type="text" id="localidade" name="localidade" placeholder="Cidade/Estado" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
+            </div>
+
+            <!-- Campo Cor Interna Adicionado -->
+            <div class="form-group">
+                <label>Cor Interna <span>*</span></label>
+                <select id="corInterna" name="corInterna" required>
+                    <option value="" disabled selected>Escolha a cor...</option>
+                    <option value="AZUL 40360 EXR 53390">AZUL 40360 EXR 53390</option>
+                    <option value="AZUL MUNSELL 3.30PB2.86/3.23">AZUL MUNSELL 3.30PB2.86/3.23</option>
+                    <option value="AZUL MUNSELL 5B7/4">AZUL MUNSELL 5B7/4</option>
+                    <option value="AZUL MUNSELL 6.35B6.99/4.98">AZUL MUNSELL 6.35B6.99/4.98</option>
+                    <option value="AZUL RAL 5000">AZUL RAL 5000</option>
+                    <option value="AZUL RAL 5009">AZUL RAL 5009</option>
+                    <option value="AZUL RAL 5017">AZUL RAL 5017</option>
+                    <option value="AZUL RAL 5019">AZUL RAL 5019</option>
+                    <option value="AZUL SATAKE">AZUL SATAKE</option>
+                    <option value="AZUL WEG 40517BR">AZUL WEG 40517BR</option>
+                    <option value="BEGE MUNSELL 2.5Y6/2">BEGE MUNSELL 2.5Y6/2</option>
+                    <option value="BEGE MUNSELL 5Y6/2">BEGE MUNSELL 5Y6/2</option>
+                    <option value="BEGE MUNSELL 7.5Y8/2">BEGE MUNSELL 7.5Y8/2</option>
+                    <option value="BEGE RAL 1001">BEGE RAL 1001</option>
+                    <option value="BEGE RAL 1014">BEGE RAL 1014</option>
+                    <option value="BRANCO RAL 9016">BRANCO RAL 9016</option>
+                    <option value="BRANCO CALIFORNIA RAL 1013">BRANCO CALIFORNIA RAL 1013</option>
+                    <option value="CINZA EXECUTIVO RAL 7021">CINZA EXECUTIVO RAL 7021</option>
+                    <option value="CINZA RAL 7022">CINZA RAL 7022</option>
+                    <option value="CINZA RAL 7035">CINZA RAL 7035</option>
+                    <option value="CINZA RAL 7038">CINZA RAL 7038</option>
+                    <option value="CINZA RAL 7039">CINZA RAL 7039</option>
+                    <option value="LARANJA MUNSELL 2.5YR6/14">LARANJA MUNSELL 2.5YR6/14</option>
+                    <option value="PRATA RAL 9006">PRATA RAL 9006</option>
+                    <option value="PRETO RAL 9005 S/B">PRETO RAL 9005 S/B</option>
+                    <option value="PRETO RAL 9017">PRETO RAL 9017</option>
+                    <option value="VERDE EXR 53390">VERDE EXR 53390</option>
+                    <option value="VERDE RAL 6002">VERDE RAL 6002</option>
+                    <option value="VERDE RAL 6018">VERDE RAL 6018</option>
+                    <option value="VERDE RAL 6027">VERDE RAL 6027</option>
+                    <option value="VERMELHO RAL 3020">VERMELHO RAL 3020</option>
+                </select>
             </div>
 
             <div class="form-group">
                 <label>Almox <span>*</span></label>
                 <input type="text" id="almox" name="almox" placeholder="Identificação do Almox" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group full-width">
                 <label>Código Item - Quantidade <span>*</span></label>
                 <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XXXXX - 10UN" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group full-width">
                 <label>Motivo da Comunicação Interna <span>*</span></label>
                 <input type="text" id="motivo" name="motivo" placeholder="Motivo resumido" required>
-                <div class="error-message">Todos os campos obrigatórios devem ser preenchidos.</div>
             </div>
 
             <div class="form-group full-width">
@@ -318,89 +194,31 @@
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzb0vX5Le_r_r6Jzfixfq5nY9M9EstzQrVBfujvjGSgQW_nl4Muct8HJnMghMlrwian/exec";
 
     document.getElementById('pesoLiquido').addEventListener('input', function(e) {
-        let value = e.target.value;
-        value = value.replace(/[^0-9,]/g, ''); 
+        let value = e.target.value.replace(/[^0-9,]/g, ''); 
         e.target.value = value;
     });
 
     async function gerarNumero() {
         const btn = document.getElementById('btnGerar');
         const inputNum = document.getElementById('numeroCI');
-        
         btn.innerText = "Gerando...";
         btn.classList.add('loading');
-
         try {
             const response = await fetch(`${WEB_APP_URL}?action=getSequence`);
             const data = await response.json();
-            
             if(data && data.numero) {
                 inputNum.value = data.numero;
-                inputNum.parentElement.parentElement.classList.remove('invalid');
                 btn.innerText = "Gerado!";
                 btn.disabled = true;
-            } else {
-                alert("Erro ao obter o número sequencial.");
-                btn.innerText = "Gerar Número CI";
-                btn.classList.remove('loading');
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Erro de conexão com o gerador.");
-            btn.innerText = "Gerar Número CI";
-            btn.classList.remove('loading');
-        }
+            } else { alert("Erro ao obter número."); btn.innerText = "Gerar Número CI"; }
+        } catch (error) { alert("Erro de conexão."); btn.innerText = "Gerar Número CI"; }
+        finally { btn.classList.remove('loading'); }
     }
 
     document.getElementById('ciForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        let formValido = true;
-        const camposObrigatorios = this.querySelectorAll('[required]');
-        
-        camposObrigatorios.forEach(campo => {
-            const container = campo.closest('.form-group');
-            if (!campo.value.trim()) {
-                container.classList.add('invalid');
-                formValido = false;
-            } else {
-                container.classList.remove('invalid');
-            }
-        });
-
-        if (!formValido) {
-            const primeiroErro = this.querySelector('.invalid');
-            if (primeiroErro) primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
-        }
-
-        const btnSubmit = document.getElementById('btnEnviar');
-        btnSubmit.innerText = "Enviando para o Asana...";
-        btnSubmit.classList.add('loading');
-
-        const fileInput = document.getElementById('arquivoAnexo');
-        let arquivoBase64 = null;
-        let arquivoName = null;
-        let arquivoType = null;
-
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            const arquivoData = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve({
-                    base64: reader.result.split(',')[1],
-                    name: file.name,
-                    type: file.type
-                });
-                reader.readAsDataURL(file);
-            });
-            arquivoBase64 = arquivoData.base64;
-            arquivoName = arquivoData.name;
-            arquivoType = arquivoData.type;
-        }
-
-        let pesoTratado = document.getElementById('pesoLiquido').value.replace(',', '.');
-
+        // Coleta de dados incluindo o novo campo corInterna
         const formData = {
             numeroCI: document.getElementById('numeroCI').value,
             acao: document.getElementById('acao').value,
@@ -410,51 +228,30 @@
             nomeCliente: document.getElementById('nomeCliente').value,
             numeroPedido: document.getElementById('numeroPedido').value,
             localidade: document.getElementById('localidade').value,
-            pesoLiquido: pesoTratado,
+            corInterna: document.getElementById('corInterna').value,
+            pesoLiquido: document.getElementById('pesoLiquido').value.replace(',', '.'),
             almox: document.getElementById('almox').value,
             motivo: document.getElementById('motivo').value,
             observacoes: document.getElementById('observacoes').value,
-            dataConclusao: document.getElementById('dataConclusao').value,
-            fileData: arquivoBase64,
-            fileName: arquivoName,
-            fileType: arquivoType
+            dataConclusao: document.getElementById('dataConclusao').value
         };
 
+        const btnSubmit = document.getElementById('btnEnviar');
+        btnSubmit.innerText = "Enviando...";
+        
         try {
             const response = await fetch(WEB_APP_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' }, 
                 body: JSON.stringify(formData)
             });
-
             const resultado = await response.json();
-
             if (resultado.success) {
-                alert("Comunicação Interna " + resultado.numeroGerado + " enviada com sucesso!");
+                alert("CI enviada com sucesso!");
                 document.getElementById('ciForm').reset();
-                
-                const btnGerar = document.getElementById('btnGerar');
-                btnGerar.innerText = "Gerar Número CI";
-                btnGerar.disabled = false;
-            } else {
-                alert("Erro: " + resultado.error);
-            }
-
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao enviar os dados para o servidor.");
-        } finally {
-            btnSubmit.innerText = "Enviar Comunicação Interna";
-            btnSubmit.classList.remove('loading');
-        }
-    });
-
-    document.getElementById('ciForm').querySelectorAll('input, select, textarea').forEach(elemento => {
-        elemento.addEventListener('input', function() {
-            if (this.value.trim()) {
-                this.closest('.form-group').classList.remove('invalid');
-            }
-        });
+            } else { alert("Erro: " + resultado.error); }
+        } catch (error) { alert("Erro ao enviar."); }
+        finally { btnSubmit.innerText = "Enviar Comunicação Interna"; }
     });
 </script>
 </body>
