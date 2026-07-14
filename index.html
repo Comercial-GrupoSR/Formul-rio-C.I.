@@ -183,10 +183,11 @@
             </div>
 
             <div class="form-group full-width">
-                <label>Anexar Arquivo ou Tirar Foto</label>
-                <input type="file" id="arquivoAnexo" name="arquivoAnexo" accept="image/*,application/pdf,.doc,.docx,.xls,.xlsx">
-            </div>
-        </div>
+    <label>Anexar Arquivos (Arraste ou clique abaixo)</label>
+    <div id="drop-zone" style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; background-color: #fafafa; border-radius: 5px;">
+        <input type="file" id="arquivoAnexo" name="arquivoAnexo" multiple style="display: block; margin: 0 auto;">
+    </div>
+</div>
 
         <button type="submit" id="btnEnviar" class="btn-submit full-width">Enviar Comunicação Interna</button>
     </form>
