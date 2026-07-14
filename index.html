@@ -149,7 +149,30 @@
     });
     
     // ... manter sua função gerarNumero() existente ...
-    async function gerarNumero() { /* ... */ }
+    async function gerarNumero() {
+    const btnGerar = document.getElementById('btnGerar');
+    const inputNumero = document.getElementById('numeroCI');
+
+    btnGerar.disabled = true;
+    btnGerar.innerText = "Gerando...";
+
+    try {
+        const response = await fetch(WEB_APP_URL + "?action=getSequence");
+        const resultado = await response.json();
+
+        if (resultado.numero) {
+            inputNumero.value = "CI-" + resultado.numero;
+        } else {
+            alert("Não foi possível gerar o número. Tente novamente.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao gerar número. Verifique sua conexão.");
+    } finally {
+        btnGerar.disabled = false;
+        btnGerar.innerText = "Gerar Número CI";
+    }
+}
 </script>
 </body>
 </html>
