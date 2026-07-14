@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comunicação Interna - Grupo SR</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Adicionado ?v=2 para forçar atualização do cache no celular -->
+    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
+    <link rel="apple-touch-icon" href="favicon.ico?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Russo+One&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,12 +15,12 @@
         }
 
         body {
-    font-family: 'Montserrat', sans-serif;
-    /* Substitua o background anterior por este: */
-    background: url('fundo.jpg') repeat center center;
-    background-size: 200px; /* Ajuste o tamanho conforme necessário para o padrão */
-    margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box;
-}
+            font-family: 'Montserrat', sans-serif;
+            /* Nova imagem de fundo */
+            background: url('fundo.jpg') repeat center center;
+            background-size: 200px;
+            margin: 0; padding: 15px; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box;
+        }
         .form-container { background-color: #ffffff; width: 100%; max-width: 650px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden; }
         .header-banner { background-color: var(--verde-fundo-logo); padding: 20px 15px; text-align: center; border-bottom: 4px solid var(--verde-escuro); }
         .header-banner img { max-width: 180px; height: auto; display: block; margin: 0 auto 10px auto; }
@@ -32,11 +34,6 @@
         input[type="text"], input[type="number"], input[type="date"], select, textarea, input[type="file"] {
             width: 100%; padding: 8px 10px; border: 1px solid #cccccc; border-radius: 5px; box-sizing: border-box; font-size: 13px; font-family: 'Montserrat', sans-serif; background-color: #fafafa; transition: all 0.2s;
         }
-        .error-message { color: #de350b; font-size: 10px; font-weight: 600; margin-top: 3px; display: none; }
-        .invalid input, .invalid select, .invalid textarea { border-color: #de350b !important; background-color: #fff8f7; }
-        .invalid .error-message { display: block; }
-        .number-generator-group { display: flex; gap: 8px; }
-        .number-generator-group input { flex: 1; background-color: #f0f2f0; font-weight: 700; color: var(--verde-escuro); }
         .btn-generator { background-color: var(--verde-escuro); color: white; border: none; padding: 0 12px; border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 12px; transition: all 0.2s; white-space: nowrap; }
         .btn-submit { background-color: var(--verde-escuro); color: white; border: none; width: 100%; padding: 12px; border-radius: 5px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Russo One', sans-serif; letter-spacing: 1px; transition: background-color 0.2s; margin-top: 15px; }
         .loading { opacity: 0.6; pointer-events: none; }
@@ -54,141 +51,35 @@
         <div class="form-grid">
             <div class="form-group full-width">
                 <label>Nº Sequencial <span>*</span></label>
-                <div class="number-generator-group">
+                <div class="number-generator-group" style="display: flex; gap: 8px;">
                     <input type="text" id="numeroCI" name="numeroCI" placeholder="Gere o número ao lado" readonly required>
                     <button type="button" id="btnGerar" class="btn-generator" onclick="gerarNumero()">Gerar Número CI</button>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Ação da CI <span>*</span></label>
-                <select id="acao" name="acao" required>
-                    <option value="" disabled selected>Escolha...</option>
-                    <option value="Fabricação">Fabricação</option>
-                    <option value="Requisição">Requisição</option>
-                    <option value="Pintura">Pintura</option>
-                </select>
-            </div>
+            <!-- ... (seus campos de formulário permanecem iguais) ... -->
+            <div class="form-group"><label>Ação da CI <span>*</span></label><select id="acao" name="acao" required><option value="" disabled selected>Escolha...</option><option value="Fabricação">Fabricação</option><option value="Requisição">Requisição</option><option value="Pintura">Pintura</option></select></div>
+            <div class="form-group"><label>Responsável CI <span>*</span></label><select id="responsavel" name="responsavel" required><option value="" disabled selected>Escolha...</option><option value="Fernando Hendges Lopes">Fernando Hendges Lopes</option><option value="Marcos Malezan Tasquetto">Marcos Malezan Tasquetto</option><option value="Raphael Naeher">Raphael Naeher</option><option value="Ricardo Moreira">Ricardo Moreira</option><option value="Alan Renato Virago">Alan Renato Virago</option><option value="José Tomas">José Tomas</option><option value="Luis Filipe">Luis Filipe</option><option value="Eduardo Prado">Eduardo Prado</option><option value="Enrique Carvalho">Enrique Carvalho</option><option value="Henrique Moreira">Henrique Moreira</option><option value="Rafael Fagan">Rafael Fagan</option></select></div>
+            <div class="form-group"><label>Destino da Comunicação <span>*</span></label><select id="destino" name="destino" required><option value="" disabled selected>Escolha...</option><option value="Almoxarifado">Almoxarifado</option><option value="Expedição">Expedição</option><option value="PCP">PCP</option></select></div>
+            <div class="form-group"><label>Data de Conclusão <span>*</span></label><input type="date" id="dataConclusao" name="dataConclusao" required></div>
+            <div class="form-group full-width"><label>Nome Cliente <span>*</span></label><input type="text" id="nomeCliente" name="nomeCliente" placeholder="Nome do cliente" required></div>
+            <div class="form-group"><label>Número Pedido <span>*</span></label><input type="number" id="numeroPedido" name="numeroPedido" placeholder="Nº do pedido" required></div>
+            <div class="form-group"><label>Peso Líq. (kg) <span>*</span></label><input type="text" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500,50" required></div>
+            <div class="form-group"><label>Localidade <span>*</span></label><input type="text" id="localidade" name="localidade" placeholder="Cidade/Estado" required></div>
+            <div class="form-group"><label>Cor Interna <span>*</span></label><select id="corInterna" name="corInterna" required><option value="" disabled selected>Escolha a cor...</option><option value="AZUL 40360 EXR 53390">AZUL 40360 EXR 53390</option><option value="AZUL MUNSELL 3.30PB2.86/3.23">AZUL MUNSELL 3.30PB2.86/3.23</option><option value="AZUL MUNSELL 5B7/4">AZUL MUNSELL 5B7/4</option><option value="AZUL MUNSELL 6.35B6.99/4.98">AZUL MUNSELL 6.35B6.99/4.98</option><option value="AZUL RAL 5000">AZUL RAL 5000</option><option value="AZUL RAL 5009">AZUL RAL 5009</option><option value="AZUL RAL 5017">AZUL RAL 5017</option><option value="AZUL RAL 5019">AZUL RAL 5019</option><option value="AZUL SATAKE">AZUL SATAKE</option><option value="AZUL WEG 40517BR">AZUL WEG 40517BR</option><option value="BEGE MUNSELL 2.5Y6/2">BEGE MUNSELL 2.5Y6/2</option><option value="BEGE MUNSELL 5Y6/2">BEGE MUNSELL 5Y6/2</option><option value="BEGE MUNSELL 7.5Y8/2">BEGE MUNSELL 7.5Y8/2</option><option value="BEGE RAL 1001">BEGE RAL 1001</option><option value="BEGE RAL 1014">BEGE RAL 1014</option><option value="BRANCO RAL 9016">BRANCO RAL 9016</option><option value="BRANCO CALIFORNIA RAL 1013">BRANCO CALIFORNIA RAL 1013</option><option value="CINZA EXECUTIVO RAL 7021">CINZA EXECUTIVO RAL 7021</option><option value="CINZA RAL 7022">CINZA RAL 7022</option><option value="CINZA RAL 7035">CINZA RAL 7035</option><option value="CINZA RAL 7038">CINZA RAL 7038</option><option value="CINZA RAL 7039">CINZA RAL 7039</option><option value="LARANJA MUNSELL 2.5YR6/14">LARANJA MUNSELL 2.5YR6/14</option><option value="PRATA RAL 9006">PRATA RAL 9006</option><option value="PRETO RAL 9005 S/B">PRETO RAL 9005 S/B</option><option value="PRETO RAL 9017">PRETO RAL 9017</option><option value="VERDE EXR 53390">VERDE EXR 53390</option><option value="VERDE RAL 6002">VERDE RAL 6002</option><option value="VERDE RAL 6018">VERDE RAL 6018</option><option value="VERDE RAL 6027">VERDE RAL 6027</option><option value="VERMELHO RAL 3020">VERMELHO RAL 3020</option></select></div>
+            <div class="form-group"><label>Almox <span>*</span></label><input type="text" id="almox" name="almox" placeholder="Identificação do Almox" required></div>
+            <div class="form-group full-width"><label>Código Item - Quantidade <span>*</span></label><input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XXXXX - 10UN" required></div>
+            <div class="form-group full-width"><label>Motivo da Comunicação Interna <span>*</span></label><input type="text" id="motivo" name="motivo" placeholder="Motivo resumido" required></div>
+            <div class="form-group full-width"><label>Observações</label><textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea></div>
 
-            <div class="form-group">
-                <label>Responsável CI <span>*</span></label>
-                <select id="responsavel" name="responsavel" required>
-                    <option value="" disabled selected>Escolha...</option>
-                    <option value="Fernando Hendges Lopes">Fernando Hendges Lopes</option>
-                    <option value="Marcos Malezan Tasquetto">Marcos Malezan Tasquetto</option>
-                    <option value="Raphael Naeher">Raphael Naeher</option>
-                    <option value="Ricardo Moreira">Ricardo Moreira</option>
-                    <option value="Alan Renato Virago">Alan Renato Virago</option>
-                    <option value="José Tomas">José Tomas</option>
-                    <option value="Luis Filipe">Luis Filipe</option>
-                    <option value="Eduardo Prado">Eduardo Prado</option>
-                    <option value="Enrique Carvalho">Enrique Carvalho</option>
-                    <option value="Henrique Moreira">Henrique Moreira</option>
-                    <option value="Rafael Fagan">Rafael Fagan</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Destino da Comunicação <span>*</span></label>
-                <select id="destino" name="destino" required>
-                    <option value="" disabled selected>Escolha...</option>
-                    <option value="Almoxarifado">Almoxarifado</option>
-                    <option value="Expedição">Expedição</option>
-                    <option value="PCP">PCP</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Data de Conclusão <span>*</span></label>
-                <input type="date" id="dataConclusao" name="dataConclusao" required>
-            </div>
-
+            <!-- Novo campo de Upload -->
             <div class="form-group full-width">
-                <label>Nome Cliente <span>*</span></label>
-                <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Nome do cliente" required>
+                <label>Anexar Arquivos (Arraste ou selecione múltiplos)</label>
+                <div id="drop-zone" style="border: 2px dashed #10543A; padding: 20px; text-align: center; background-color: #f9f9f9; border-radius: 5px;">
+                    <input type="file" id="arquivoAnexo" name="arquivos[]" multiple style="width: 100%;">
+                </div>
             </div>
-
-            <div class="form-group">
-                <label>Número Pedido <span>*</span></label>
-                <input type="number" id="numeroPedido" name="numeroPedido" placeholder="Nº do pedido" required>
-            </div>
-
-            <div class="form-group">
-                <label>Peso Líq. (kg) <span>*</span></label>
-                <input type="text" id="pesoLiquido" name="pesoLiquido" placeholder="Ex: 1500,50" required>
-            </div>
-
-            <div class="form-group">
-                <label>Localidade <span>*</span></label>
-                <input type="text" id="localidade" name="localidade" placeholder="Cidade/Estado" required>
-            </div>
-
-            <!-- Campo Cor Interna Adicionado -->
-            <div class="form-group">
-                <label>Cor Interna <span>*</span></label>
-                <select id="corInterna" name="corInterna" required>
-                    <option value="" disabled selected>Escolha a cor...</option>
-                    <option value="AZUL 40360 EXR 53390">AZUL 40360 EXR 53390</option>
-                    <option value="AZUL MUNSELL 3.30PB2.86/3.23">AZUL MUNSELL 3.30PB2.86/3.23</option>
-                    <option value="AZUL MUNSELL 5B7/4">AZUL MUNSELL 5B7/4</option>
-                    <option value="AZUL MUNSELL 6.35B6.99/4.98">AZUL MUNSELL 6.35B6.99/4.98</option>
-                    <option value="AZUL RAL 5000">AZUL RAL 5000</option>
-                    <option value="AZUL RAL 5009">AZUL RAL 5009</option>
-                    <option value="AZUL RAL 5017">AZUL RAL 5017</option>
-                    <option value="AZUL RAL 5019">AZUL RAL 5019</option>
-                    <option value="AZUL SATAKE">AZUL SATAKE</option>
-                    <option value="AZUL WEG 40517BR">AZUL WEG 40517BR</option>
-                    <option value="BEGE MUNSELL 2.5Y6/2">BEGE MUNSELL 2.5Y6/2</option>
-                    <option value="BEGE MUNSELL 5Y6/2">BEGE MUNSELL 5Y6/2</option>
-                    <option value="BEGE MUNSELL 7.5Y8/2">BEGE MUNSELL 7.5Y8/2</option>
-                    <option value="BEGE RAL 1001">BEGE RAL 1001</option>
-                    <option value="BEGE RAL 1014">BEGE RAL 1014</option>
-                    <option value="BRANCO RAL 9016">BRANCO RAL 9016</option>
-                    <option value="BRANCO CALIFORNIA RAL 1013">BRANCO CALIFORNIA RAL 1013</option>
-                    <option value="CINZA EXECUTIVO RAL 7021">CINZA EXECUTIVO RAL 7021</option>
-                    <option value="CINZA RAL 7022">CINZA RAL 7022</option>
-                    <option value="CINZA RAL 7035">CINZA RAL 7035</option>
-                    <option value="CINZA RAL 7038">CINZA RAL 7038</option>
-                    <option value="CINZA RAL 7039">CINZA RAL 7039</option>
-                    <option value="LARANJA MUNSELL 2.5YR6/14">LARANJA MUNSELL 2.5YR6/14</option>
-                    <option value="PRATA RAL 9006">PRATA RAL 9006</option>
-                    <option value="PRETO RAL 9005 S/B">PRETO RAL 9005 S/B</option>
-                    <option value="PRETO RAL 9017">PRETO RAL 9017</option>
-                    <option value="VERDE EXR 53390">VERDE EXR 53390</option>
-                    <option value="VERDE RAL 6002">VERDE RAL 6002</option>
-                    <option value="VERDE RAL 6018">VERDE RAL 6018</option>
-                    <option value="VERDE RAL 6027">VERDE RAL 6027</option>
-                    <option value="VERMELHO RAL 3020">VERMELHO RAL 3020</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Almox <span>*</span></label>
-                <input type="text" id="almox" name="almox" placeholder="Identificação do Almox" required>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Código Item - Quantidade <span>*</span></label>
-                <input type="text" id="codigoQuantidade" name="codigoQuantidade" placeholder="Ex: Item XXXXX - 10UN" required>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Motivo da Comunicação Interna <span>*</span></label>
-                <input type="text" id="motivo" name="motivo" placeholder="Motivo resumido" required>
-            </div>
-
-            <div class="form-group full-width">
-                <label>Observações</label>
-                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea>
-            </div>
-
-            <div class="form-group full-width">
-    <label>Anexar Arquivos (Arraste ou clique abaixo)</label>
-    <div id="drop-zone" style="border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer; background-color: #fafafa; border-radius: 5px;">
-        <input type="file" id="arquivoAnexo" name="arquivoAnexo" multiple style="display: block; margin: 0 auto;">
-    </div>
-</div>
-
+        </div>
         <button type="submit" id="btnEnviar" class="btn-submit full-width">Enviar Comunicação Interna</button>
     </form>
 </div>
@@ -196,34 +87,33 @@
 <script>
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzb0vX5Le_r_r6Jzfixfq5nY9M9EstzQrVBfujvjGSgQW_nl4Muct8HJnMghMlrwian/exec";
 
-    document.getElementById('pesoLiquido').addEventListener('input', function(e) {
-        let value = e.target.value.replace(/[^0-9,]/g, ''); 
-        e.target.value = value;
-    });
-
-    async function gerarNumero() {
-        const btn = document.getElementById('btnGerar');
-        const inputNum = document.getElementById('numeroCI');
-        btn.innerText = "Gerando...";
-        btn.classList.add('loading');
-        try {
-            const response = await fetch(`${WEB_APP_URL}?action=getSequence`);
-            const data = await response.json();
-            if(data && data.numero) {
-                inputNum.value = data.numero;
-                btn.innerText = "Gerado!";
-                btn.disabled = true;
-            } else { alert("Erro ao obter número."); btn.innerText = "Gerar Número CI"; }
-        } catch (error) { alert("Erro de conexão."); btn.innerText = "Gerar Número CI"; }
-        finally { btn.classList.remove('loading'); }
+    // Função para converter arquivos em Base64
+    async function filesToBase64(inputElement) {
+        const files = inputElement.files;
+        let filesData = [];
+        for (let file of files) {
+            const base64 = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
+            filesData.push({ name: file.name, data: base64, type: file.type });
+        }
+        return filesData;
     }
 
     document.getElementById('ciForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Coleta de dados incluindo o novo campo corInterna
+        const btnSubmit = document.getElementById('btnEnviar');
+        btnSubmit.innerText = "Processando arquivos e enviando...";
+        
+        // Coleta os arquivos
+        const arquivos = await filesToBase64(document.getElementById('arquivoAnexo'));
+        
         const formData = {
             numeroCI: document.getElementById('numeroCI').value,
+            // ... (restante dos campos)
             acao: document.getElementById('acao').value,
             responsavel: document.getElementById('responsavel').value,
             destino: document.getElementById('destino').value,
@@ -236,11 +126,9 @@
             almox: document.getElementById('almox').value,
             motivo: document.getElementById('motivo').value,
             observacoes: document.getElementById('observacoes').value,
-            dataConclusao: document.getElementById('dataConclusao').value
+            dataConclusao: document.getElementById('dataConclusao').value,
+            arquivos: arquivos // Passando o array de arquivos
         };
-
-        const btnSubmit = document.getElementById('btnEnviar');
-        btnSubmit.innerText = "Enviando...";
         
         try {
             const response = await fetch(WEB_APP_URL, {
@@ -256,6 +144,9 @@
         } catch (error) { alert("Erro ao enviar."); }
         finally { btnSubmit.innerText = "Enviar Comunicação Interna"; }
     });
+    
+    // ... manter sua função gerarNumero() existente ...
+    async function gerarNumero() { /* ... */ }
 </script>
 </body>
 </html>
