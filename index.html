@@ -50,7 +50,7 @@
         <p>Comunicação Interna</p>
     </div>
     
-    <form id="ciForm" class="form-body" novalidate>
+    <form id="ciForm" class="form-body">
         <div class="form-grid">
             <div class="form-group full-width">
                 <label>Nº Comunicação Interna <span>*</span></label>
@@ -108,6 +108,13 @@
 
     document.getElementById('ciForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+
+        // Validação: impede o envio se algum campo obrigatório estiver vazio
+        const form = document.getElementById('ciForm');
+        if (!form.checkValidity()) {
+            form.reportValidity(); // mostra ao usuário qual campo falta preencher
+            return;
+        }
         
         const btnSubmit = document.getElementById('btnEnviar');
         btnSubmit.innerText = "Processando arquivos e enviando...";
